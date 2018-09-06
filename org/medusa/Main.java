@@ -14,14 +14,12 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -36,6 +34,9 @@ public class Main {
 	public static String emailPrefix = "";
 	public static String passwd = "";
 	
+	public static double version = 0.1;
+	public static String v = "Alpha";
+	
 	public static int currentProgressive = 0;
 	public static int currentNumber = 0;
 	public static int accountsWanted = 1;
@@ -48,6 +49,8 @@ public class Main {
     static File logFile = new File(timeLog + randomAlphaNumeric(2) + ".txt");
 	
     public static void main(String[] args) throws InterruptedException, MalformedURLException, JSONException {
+    	System.out.println("Welcome to Medusa's Account Creator (v" + version + "-" + v + ")");
+    	System.out.println("Please note that this might not work 100% of the time");
     	MainGUI gui = new MainGUI();
     	gui.setVisible(true);
     }
@@ -111,8 +114,8 @@ public class Main {
     	    InputStream instream = entity.getContent();
     	    String getResponseString = readStream(instream);
 
+	        completeNumber++;
     	    try {
-    	        completeNumber++;
             	System.out.println("-----------------------");
             	System.out.println(email + ":" + password + ":" + username);
     	        if (getResponseString.contains("Account Created") || getResponseString.length() < 2){
@@ -126,6 +129,7 @@ public class Main {
     	        	NotificationGUI gui = new NotificationGUI("complete");
     	        	gui.setAlwaysOnTop(true);
     	        	gui.setVisible(true);
+    	        	MainGUI.running = false;
     	        }
     	        } else {
     	        System.out.println("Creation failed...");
