@@ -1,5 +1,5 @@
 ## RunescapeAccountCreator
-Simple RuneScape Account Creator
+Simple RuneScape Account Creator. 
 No proxy support, but it might be added later
 
 ## Dependencies
