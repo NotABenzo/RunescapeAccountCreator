@@ -1,6 +1,5 @@
 package org.medusa;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -13,7 +12,6 @@ import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.net.MalformedURLException;
 import java.awt.event.ActionEvent;
 
 public class MainGUI extends JFrame {
@@ -46,6 +44,8 @@ public class MainGUI extends JFrame {
 		});
 	}
 
+	public static boolean running = false;
+	
 	public static int runTimes = 0;
 	
 	/**
@@ -173,8 +173,15 @@ public class MainGUI extends JFrame {
 					return;
 				}
 				
+				if (running) {
+					lblError.setText("Already running. Please wait for it to finish :)");
+					return;
+				}
+				
 				runTimes++;
 				
+				Main.currentNumber = 0;
+				Main.completeNumber = 0;
 				Main.currentNumber = 0;
 				Main.emailPrefix = textField.getText();
 				Main.emailDomain = txtGmailcom.getText();
@@ -184,6 +191,8 @@ public class MainGUI extends JFrame {
 				Main.currentProgressive = Integer.parseInt(textField_1.getText());
 				Main.started = true;
 				Main.accountsCreated = 0;
+				
+				running = true;
 				
 				for(int i=0; i<Main.accountsWanted; i++){
 					try {
