@@ -112,7 +112,6 @@ public class Main {
     	    String getResponseString = readStream(instream);
 
     	    try {
-    	        System.out.println(getResponseString);
     	        completeNumber++;
             	System.out.println("-----------------------");
             	System.out.println(email + ":" + password + ":" + username);
